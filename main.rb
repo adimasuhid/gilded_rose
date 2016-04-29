@@ -1,6 +1,7 @@
 require './gilded_rose.rb'
 require './item.rb'
-# Run the program by typing `ruby run_program.rb`
+# Run the program by typing `ruby main.rb`
+# Also please run tests before pushing
 
 # Add some test item
 aged_brie = Item.new("Aged Brie", 15, 50)
