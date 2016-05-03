@@ -1,16 +1,20 @@
 require 'spec_helper'
 
 describe GildedRose do
+  let!(:sulfuras) { Item.new("Sulfuras", 10, 10)  }
+
   describe "#update_quality" do
     context "Normal Item" do
-      it "decrement by 1 when Selln value approaches" do
-
+      it "decrement by 1 when Sell in value approaches" do
       end
     end
 
     context "Sulfuras" do
       it "does not to be sold or decreases in quality" do
-        expect(false).to eq true
+        gilded_rose = GildedRose.new([sulfuras])
+        gilded_rose.update_quality
+
+        expect(item.quality).to eq 10
       end
     end
 
@@ -21,19 +25,19 @@ describe GildedRose do
     end
 
     context "Backstage Passes" do
-      it "increases in quality as it's Selln value approaches" do
+      it "increases in quality as it's Sell in value approaches" do
         expect(false).to eq true
       end
 
-      it "quality increases by 2 when Selln date is 10 or lesser" do
+      it "quality increases by 2 when Sell in date is 10 or lesser" do
         expect(false).to eq true
       end
 
-      it "quality increases by 3 when Selln date is 5 or lesser" do
+      it "quality increases by 3 when Sell in date is 5 or lesser" do
         expect(false).to eq true
       end
 
-      it "quality drops to 0 when Selln is negative" do
+      it "quality drops to 0 when Sell in is negative" do
         expect(false).to eq true
       end
     end

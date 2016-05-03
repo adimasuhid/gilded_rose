@@ -1,55 +1,21 @@
 class GildedRose
-
   #Accepts array of items
   def initialize(items)
     @items = items
   end
 
   #Loops through each item in the array of items
-  def update_quality()
+  def update_quality
     @items.each do |item|
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            item.quality = item.quality - 1
-          end
-        end
-      else
-        if item.quality < 50
-          item.quality = item.quality + 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-            if item.sell_in < 6
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-          end
-        end
-      end
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
-      end
-      if item.sell_in < 0
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality > 0
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
-              end
-            end
-          else
-            item.quality = item.quality - item.quality
-          end
+      case item.name
+        when "Sulfuras" then
+          item.quality
+        when "Aged Brie" then
+        when "Conjured" then
+        when "Backstage passes" then
         else
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
-        end
+          # TODO
+          # Normal Item
       end
     end
   end
@@ -72,15 +38,12 @@ class Item
 end
 
 #Initializes new item
-no_vice_item = Item.new("Normal Item", 10, 10)
-aged_brie = Item.new("Aged Brie", 10, 10)
-sufuras = Item.new("Sufuras", 10, 10)
-conjured = Item.new("Conjured", 10, 10)
-backstage_passes = Item.new("Backstage passes", 10, 10)
-
-#Converts items to array of items
-items = [item1, item2]
+#novice_item = Item.new("Normal Item", 10, 10)
+#aged_brie = Item.new("Aged Brie", 10, 10)
+#sulfuras = Item.new("Sulfuras", 10, 10)
+#conjured = Item.new("Conjured", 10, 10)
+#backstage_passes = Item.new("Backstage passes", 10, 10)
 
 #Passes array of items to GildedRose as params
-gilded_rose = GildedRose.new(items)
-gilded_rose.update_quality()
+#gilded_rose = GildedRose.new([sulfuras])
+#puts gilded_rose.update_quality()
