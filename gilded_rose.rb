@@ -1,9 +1,11 @@
 class GildedRose
 
+  #Accepts array of items
   def initialize(items)
     @items = items
   end
 
+  #Loops through each item in the array of items
   def update_quality()
     @items.each do |item|
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
@@ -62,7 +64,20 @@ class Item
     @quality = quality
   end
 
+  #Would result to: name, 10, 10
+  #Whereas name is a string, sell_in is an int, quality is an int
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
   end
 end
+
+#Initializes new item
+item1 = Item.new("item1", 10, 10)
+item2 = Item.new("item2", 10, 10)
+
+#Converts items to array of items
+items = [item1, item2]
+
+#Passes array of items to GildedRose as params
+gilded_rose = GildedRose.new(items)
+gilded_rose.update_quality()
