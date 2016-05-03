@@ -72,8 +72,11 @@ class Item
 end
 
 #Initializes new item
-item1 = Item.new("item1", 10, 10)
-item2 = Item.new("item2", 10, 10)
+no_vice_item = Item.new("Normal Item", 10, 10)
+aged_brie = Item.new("Aged Brie", 10, 10)
+sufuras = Item.new("Sufuras", 10, 10)
+conjured = Item.new("Conjured", 10, 10)
+backstage_passes = Item.new("Backstage passes", 10, 10)
 
 #Converts items to array of items
 items = [item1, item2]
