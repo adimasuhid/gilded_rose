@@ -1,53 +1,21 @@
 class GildedRose
-
+  #Accepts array of items
   def initialize(items)
     @items = items
   end
 
-  def update_quality()
+  #Loops through each item in the array of items
+  def update_quality
     @items.each do |item|
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            item.quality = item.quality - 1
-          end
-        end
-      else
-        if item.quality < 50
-          item.quality = item.quality + 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-            if item.sell_in < 6
-              if item.quality < 50
-                item.quality = item.quality + 1
-              end
-            end
-          end
-        end
-      end
-      if item.name != "Sulfuras, Hand of Ragnaros"
-        item.sell_in = item.sell_in - 1
-      end
-      if item.sell_in < 0
-        if item.name != "Aged Brie"
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            if item.quality > 0
-              if item.name != "Sulfuras, Hand of Ragnaros"
-                item.quality = item.quality - 1
-              end
-            end
-          else
-            item.quality = item.quality - item.quality
-          end
+      case item.name
+        when "Sulfuras" then
+          item.quality
+        when "Aged Brie" then
+        when "Conjured" then
+        when "Backstage passes" then
         else
-          if item.quality < 50
-            item.quality = item.quality + 1
-          end
-        end
+          # TODO
+          # Normal Item
       end
     end
   end
@@ -62,7 +30,20 @@ class Item
     @quality = quality
   end
 
+  #Would result to: name, 10, 10
+  #Whereas name is a string, sell_in is an int, quality is an int
   def to_s()
     "#{@name}, #{@sell_in}, #{@quality}"
   end
 end
+
+#Initializes new item
+#novice_item = Item.new("Normal Item", 10, 10)
+#aged_brie = Item.new("Aged Brie", 10, 10)
+#sulfuras = Item.new("Sulfuras", 10, 10)
+#conjured = Item.new("Conjured", 10, 10)
+#backstage_passes = Item.new("Backstage passes", 10, 10)
+
+#Passes array of items to GildedRose as params
+#gilded_rose = GildedRose.new([sulfuras])
+#puts gilded_rose.update_quality()
