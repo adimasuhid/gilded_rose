@@ -14,14 +14,14 @@ class GildedRose
   end
 
 
-  def update_quality()
+  def update_quality
     @items.each do |item|
       next if item.name == LEGENDARY_ITEM
 
       item.quality += addends(item)
-      item.quality = 50 if item.quality > 50
-      item.quality = 0 if item.quality < 0
       item.sell_in -= 1
+
+      fix_item(item)
     end
   end
 
@@ -31,36 +31,33 @@ private
     RARE_ITEMS.values.include?(item.name) ? rare(item) : common(item)
   end
 
+  def fix_item(item)
+    item.quality = 50 if item.quality > 50
+    item.quality = 0 if item.quality < 0
+  end
+
   def common(item)
     item.sell_in <= 0 ? -2 : -1
   end
 
   def rare(item)
-    if item.name == RARE_ITEMS[:aged_brie] 
-      aged_brie(item)
-    elsif item.name == RARE_ITEMS[:backstage]
-      backstage(item)
-    elsif item.name == RARE_ITEMS[:conjured]
-      -2
-    end
+    return aged_brie(item) if RARE_ITEMS[:aged_brie] == item.name
+    return backstage(item) if RARE_ITEMS[:backstage] == item.name
+    return -2              if RARE_ITEMS[:conjured] == item.name
   end
 
+  # Rare items addends
+  #
   def aged_brie(item)
     item.sell_in <= 0 ? 2 : 1
   end
 
   def backstage(item)
-    n = 1
+    return 1 if item.sell_in > 10
+    return 2 if item.sell_in >= 6
+    return 3 if item.sell_in >= 1
 
-    if item.sell_in > 10
-      1
-    elsif item.sell_in >= 6 && item.sell_in <= 10
-      2
-    elsif item.sell_in <= 5 && item.sell_in >= 1
-      3
-    else
-      -(item.quality)
-    end
+    -(item.quality)
   end
 
 end
