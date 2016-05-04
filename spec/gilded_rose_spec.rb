@@ -11,7 +11,7 @@ describe GildedRose do
 
 
     let(:gilded_rose) do
-      items = [common, aged_brie, backstage, conjured, sulfuras] 
+      items = [common, aged_brie, backstage, conjured, sulfuras]
       GildedRose.new items
     end
 
@@ -59,7 +59,7 @@ describe GildedRose do
       it 'increases in quality by 1 as it gets older' do
         aged_brie.sell_in = 1
         gilded_rose.update_quality
-        
+
         expect(aged_brie.quality).to eq 21
       end
 
@@ -74,7 +74,7 @@ describe GildedRose do
     context 'Backstage passes to a TAFKAL80ETC concert' do
       it 'increases quality by 1 when sell_in is greater than 10' do
         gilded_rose.update_quality
-        
+
         expect(backstage.quality).to eq 21
       end
 
@@ -95,7 +95,7 @@ describe GildedRose do
       it 'drops quality into 0 when sell_in reaches 0 or less' do
         backstage.sell_in = 0
         gilded_rose.update_quality
-        
+
         expect(backstage.quality).to eq 0
       end
     end
@@ -103,7 +103,7 @@ describe GildedRose do
     context 'Sulfuras, Hand of Ragnaros' do
       it 'is a god(never sells)' do
         gilded_rose.update_quality
-        
+
         expect(sulfuras.quality).to eq 80
         expect(sulfuras.sell_in).to eq 0
       end
@@ -112,7 +112,7 @@ describe GildedRose do
     context 'Conjured, Hand of God' do
       it 'degrades twice as any item' do
         gilded_rose.update_quality
-        
+
         expect(conjured.quality).to eq 18
       end
     end

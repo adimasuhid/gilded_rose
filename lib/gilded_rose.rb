@@ -25,7 +25,7 @@ class GildedRose
     end
   end
 
-private
+  private
 
   def addend(item)
     RARE_ITEMS.values.include?(item.name) ? rare(item) : common(item)
@@ -54,12 +54,12 @@ private
 
   def backstage
     lambda do |item|
-     return 1 if item.sell_in > 10
-     return 2 if item.sell_in >= 6
-     return 3 if item.sell_in >= 1
+      return 1 if item.sell_in > 10
+      return 2 if item.sell_in >= 6
+      return 3 if item.sell_in >= 1
 
-     -(item.quality)
-   end
+      -(item.quality)
+    end
   end
 
 end
