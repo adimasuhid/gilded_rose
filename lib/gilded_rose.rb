@@ -18,7 +18,7 @@ class GildedRose
     @items.each do |item|
       next if item.name == LEGENDARY_ITEM
 
-      item.quality += addends(item)
+      item.quality += addend(item)
       item.sell_in -= 1
 
       fix_item(item)
@@ -27,7 +27,7 @@ class GildedRose
 
 private
 
-  def addends(item)
+  def addend(item)
     RARE_ITEMS.values.include?(item.name) ? rare(item) : common(item)
   end
 
@@ -41,23 +41,25 @@ private
   end
 
   def rare(item)
-    return aged_brie(item) if RARE_ITEMS[:aged_brie] == item.name
-    return backstage(item) if RARE_ITEMS[:backstage] == item.name
-    return -2              if RARE_ITEMS[:conjured] == item.name
+    return aged_brie.call(item) if RARE_ITEMS[:aged_brie] == item.name
+    return backstage.call(item) if RARE_ITEMS[:backstage] == item.name
+    return -2                   if RARE_ITEMS[:conjured] == item.name
   end
 
   # Rare items addends
   #
-  def aged_brie(item)
-    item.sell_in <= 0 ? 2 : 1
+  def aged_brie
+    lambda { |item| item.sell_in <= 0 ? 2 : 1 }
   end
 
-  def backstage(item)
-    return 1 if item.sell_in > 10
-    return 2 if item.sell_in >= 6
-    return 3 if item.sell_in >= 1
+  def backstage
+    lambda do |item|
+     return 1 if item.sell_in > 10
+     return 2 if item.sell_in >= 6
+     return 3 if item.sell_in >= 1
 
-    -(item.quality)
+     -(item.quality)
+   end
   end
 
 end
